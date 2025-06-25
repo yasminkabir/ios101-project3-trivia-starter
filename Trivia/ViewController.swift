@@ -2,18 +2,19 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    // MARK: - Outlets
-    @IBOutlet weak var questionNumberLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var questionLabel: UILabel!
     
-    @IBOutlet weak var answerButton1: UIButton!
-    @IBOutlet weak var answerButton2: UIButton!
-    @IBOutlet weak var answerButton3: UIButton!
-    @IBOutlet weak var answerButton4: UIButton!
+    
+    // MARK: - Outlets
+    @IBOutlet weak var Question: UILabel!
+    @IBOutlet weak var Category: UILabel!
+    @IBOutlet weak var ActualQuestion: UILabel!
+    @IBOutlet weak var Button1: UIButton!
+    @IBOutlet weak var Button2: UIButton!
+    @IBOutlet weak var Button3: UIButton!
+    @IBOutlet weak var Button4: UIButton!
 
     // MARK: - Question Model
-    struct Question {
+    struct QuestionItem {
         let question: String
         let category: String
         let answers: [String]
@@ -21,23 +22,23 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Data & State
-    let questions: [Question] = [
-        Question(
-            question: "What was the first weapon pack for 'PAYDAY'?",
-            category: "Entertainment: Video Games",
-            answers: ["The Gage Weapon Pack #1", "The Overkill Pack", "The Gage Chivalry Pack", "The Gage Historical Pack"],
+    let questions: [QuestionItem] = [
+        QuestionItem(
+            question: "What is the main character of the anime 'Death Note'?",
+            category: "Entertainment: Anime",
+            answers: ["Light Yagami", "Naruto", "Goku", "Deku"],
             correctAnswerIndex: 0
         ),
-        Question(
-            question: "Who developed Sonic the Hedgehog?",
-            category: "Entertainment: Video Games",
-            answers: ["Nintendo", "SEGA", "Capcom", "Bandai Namco"],
+        QuestionItem(
+            question: "What fruit is yellow?",
+            category: "Food: Fruit",
+            answers: ["Apple", "Banana", "Strawberry", "Blueberry"],
             correctAnswerIndex: 1
         ),
-        Question(
-            question: "What year was the PlayStation 5 released?",
-            category: "Entertainment: Video Games",
-            answers: ["2019", "2020", "2021", "2018"],
+        QuestionItem(
+            question: "What does AOT stand for?",
+            category: "Entertainment: Anime",
+            answers: ["After Our Time", "Attack On Titan", "Alter Our Time", "Attack Of Titans"],
             correctAnswerIndex: 1
         )
     ]
@@ -55,16 +56,16 @@ class ViewController: UIViewController {
     func loadQuestion() {
         let current = questions[currentQuestionIndex]
 
-        questionNumberLabel.text = "Question: \(currentQuestionIndex + 1)/\(questions.count)"
-        categoryLabel.text = current.category
-        questionLabel.text = current.question
+        Question.text = "Question: \(currentQuestionIndex + 1)/\(questions.count)"
+        Category.text = current.category
+        ActualQuestion.text = current.question
 
-        answerButton1.setTitle(current.answers[0], for: .normal)
-        answerButton2.setTitle(current.answers[1], for: .normal)
-        answerButton3.setTitle(current.answers[2], for: .normal)
-        answerButton4.setTitle(current.answers[3], for: .normal)
+        Button1.setTitle(current.answers[0], for: .normal)
+        Button2.setTitle(current.answers[1], for: .normal)
+        Button3.setTitle(current.answers[2], for: .normal)
+        Button4.setTitle(current.answers[3], for: .normal)
 
-        [answerButton1, answerButton2, answerButton3, answerButton4].forEach {
+        [Button1, Button2, Button3, Button4].forEach {
             $0?.isEnabled = true
             $0?.backgroundColor = UIColor.systemBlue
         }
@@ -76,10 +77,10 @@ class ViewController: UIViewController {
         let selectedIndex: Int
 
         switch sender {
-        case answerButton1: selectedIndex = 0
-        case answerButton2: selectedIndex = 1
-        case answerButton3: selectedIndex = 2
-        case answerButton4: selectedIndex = 3
+        case Button1: selectedIndex = 0
+        case Button2: selectedIndex = 1
+        case Button3: selectedIndex = 2
+        case Button4: selectedIndex = 3
         default: return
         }
 
@@ -87,7 +88,7 @@ class ViewController: UIViewController {
             score += 1
         }
 
-        [answerButton1, answerButton2, answerButton3, answerButton4].forEach { $0?.isEnabled = false }
+        [Button1, Button2, Button3, Button4].forEach { $0?.isEnabled = false }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.currentQuestionIndex += 1
@@ -117,7 +118,7 @@ class ViewController: UIViewController {
     func restartGame() {
         currentQuestionIndex = 0
         score = 0
-        [answerButton1, answerButton2, answerButton3, answerButton4].forEach {
+        [Button1, Button2, Button3, Button4].forEach {
             $0?.isHidden = false
         }
         loadQuestion()
