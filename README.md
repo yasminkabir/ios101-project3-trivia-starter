@@ -4,7 +4,7 @@ Submitted by: Yasmin Kabir
 
 Quizzy is an app that test your knowledge on different topics.
 
-Time spent: 3 hours spent in total
+Time spent: 4 hours spent in total
 
 ## Required Features
 
