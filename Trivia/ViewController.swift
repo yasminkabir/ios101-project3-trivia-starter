@@ -73,6 +73,7 @@ class ViewController: UIViewController {
 
     // MARK: - Handle Answer Selection
     @IBAction func answerSelected(_ sender: UIButton) {
+        print("button worked!")
         let current = questions[currentQuestionIndex]
         let selectedIndex: Int
 
